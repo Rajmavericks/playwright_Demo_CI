@@ -1,0 +1,28 @@
+{
+  "Register User": {
+    "name": "Rajkumar",
+    "email": "rajkumar1263@example.com",
+    "password": "R@jkumar1525",
+    "title": "Mr.",
+    "day": "15",
+    "month": "1",
+    "year": "1987",
+    "firstName": "Rajkumar",
+    "lastName": "Rajendran",
+    "company": "QnQ",
+    "address1": "Senthur garden",
+    "address2": "Kondayampalayam",
+    "state": "Tamil Nadu",
+    "city": "Coimbatore",
+    "zipcode": "641110",
+    "mobile": "8754432311"
+  },
+  "Invalid User": {
+    "email": "raj@gmail.com",
+    "password": "skjsfdjjfks"
+  },
+  "Register user existing mail": {
+    "name": "Rajkumar",
+    "email": "rajinigcp@gmail.com"
+  }
+}

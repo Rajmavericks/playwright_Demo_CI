@@ -1,0 +1,31 @@
+{
+  "name": "playwright_myworks",
+  "version": "1.0.0",
+  "description": "Playtwright framework with page object model and data driven testing",
+  "main": "index.js",
+  "scripts": {
+    "test": "playwright test",
+    "test:headed": "playwright test --headed",
+    "test:ui": "playwright test --ui",
+    "test:debug": "playwright test --debug",
+    "test:register": "playwright test tests/e2e_Registeruser.spec.ts",
+    "report": "playwright show-report",
+    "allure:clean": "node -e \"const fs=require('fs');['allure-results','allure-report'].forEach(d=>fs.rmSync(d,{recursive:true,force:true}));\"",
+    "allure:generate": "allure generate allure-results --clean -o allure-report",
+    "allure:open": "allure open allure-report",
+    "allure:report": "allure generate allure-results --clean -o allure-report && allure open allure-report",
+    "allure:fresh": "npm run allure:clean && playwright test tests/e2e_Registeruser.spec.ts && npm run allure:generate",
+    "allure:fresh:open": "npm run allure:fresh && npm run allure:open",
+    "test:ci": "playwright test tests/e2e_Registeruser.spec.ts",
+    "allure:ci": "npm run allure:clean && npm run test:ci && npm run allure:generate"
+  },
+  "keywords": ["playwright", "automation", "e2e", "typescript", "pom", "allure"],
+  "author": "Rajkumar",
+  "license": "ISC",
+  "devDependencies": {
+    "@playwright/test": "^1.58.2",
+    "@types/node": "^25.5.0",
+    "allure-commandline": "^2.38.1",
+    "allure-playwright": "^3.6.0"
+  }
+}

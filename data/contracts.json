@@ -1,0 +1,44 @@
+{
+  "Register User": {
+    "required": [
+      "name",
+      "email",
+      "password",
+      "title",
+      "day",
+      "month",
+      "year",
+      "firstName",
+      "lastName",
+      "company",
+      "address1",
+      "state",
+      "city",
+      "zipcode",
+      "mobile"
+    ],
+    "optional": [
+      "address2",
+      "country",
+      "newsletter",
+      "offers"
+    ],
+    "unknownKeys": "error"
+  },
+  "Invalid User": {
+    "required": [
+      "email",
+      "password"
+    ],
+    "optional": [],
+    "unknownKeys": "error"
+  },
+  "Register user existing mail": {
+    "required": [
+      "name",
+      "email"
+    ],
+    "optional": [],
+    "unknownKeys": "error"
+  }
+}
