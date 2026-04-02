@@ -1,6 +1,11 @@
 pipeline {
   agent any
 
+  tools {
+    // Configure this name in Jenkins: Manage Jenkins > Global Tool Configuration > NodeJS
+    nodejs 'NodeJS_20'
+  }
+
   options {
     timestamps()
   }
@@ -60,6 +65,26 @@ pipeline {
   post {
     always {
       junit allowEmptyResults: true, testResults: 'test-results/results.xml'
+      script {
+        if (fileExists('allure-results')) {
+          // Generate static Allure HTML report in workspace.
+          if (isUnix()) {
+            sh 'npx allure generate allure-results --clean -o allure-report'
+          } else {
+            bat 'npx allure generate allure-results --clean -o allure-report'
+          }
+
+          // Requires Allure Jenkins plugin. Publishes the report in Jenkins UI.
+          // Keep build stable if plugin/tooling is missing.
+          try {
+            allure includeProperties: false, jdk: '', results: [[path: 'allure-results']]
+          } catch (err) {
+            echo "Allure Jenkins publish skipped: ${err}"
+          }
+        } else {
+          echo 'allure-results folder was not found. Allure report generation skipped.'
+        }
+      }
       archiveArtifacts artifacts: 'playwright-report/**,test-results/**,allure-results/**,allure-report/**', allowEmptyArchive: true, fingerprint: true
     }
   }
