@@ -62,3 +62,20 @@ jobs:
       with:
         files: test-results/results.xml
         check_name: Test Results
+
+    - name: Deploy Allure Report to GitHub Pages
+      if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' && !cancelled() }}
+      run: |
+        # Copy allure-report to docs folder
+        rm -rf docs
+        cp -r allure-report docs
+        
+        # Configure Git
+        git config user.name "GitHub Actions"
+        git config user.email "actions@github.com"
+        
+        # Commit and push
+        git add docs/
+        git commit -m "chore: update allure report from workflow run ${{ github.run_number }}" || echo "No changes to commit"
+        git push origin main
+      continue-on-error: true
